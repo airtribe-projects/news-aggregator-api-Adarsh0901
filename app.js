@@ -1,17 +1,11 @@
 const express = require('express');
-const app = express();
-const port = 3000;
+const AuthRoute = require("./routes/authRoute");
+const NewsRoute = require("./routes/newsRoute");
+const server = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
-app.listen(port, (err) => {
-    if (err) {
-        return console.log('Something bad happened', err);
-    }
-    console.log(`Server is listening on ${port}`);
-});
+server.use("/users", AuthRoute);
+server.use("/news", NewsRoute);
 
-
-
-module.exports = app;
+module.exports = server;
